@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    // Not needed for this module: Spring Boot is only for full applications with a main class.
+    // This module is just a library (DTOs and constants), so we don't need to create an executable jar.
+    // id 'org.springframework.boot' version '3.5.4'
+
+
+//    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'org.ober6'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //Provides Jakarta annotations like @Min, @NotNull, etc.
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    // Hibernate is the implementation of Jakarta Validation (actually enforces the rules).
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
+    // Spring Boot starter includes Spring context, auto-configuration, etc.
+    // Not needed here — we don't have any Spring components or a main class.
+    // implementation 'org.springframework.boot:spring-boot-starter'
+
+    //***tests***
+
+    // Spring Boot testing includes @SpringBootTest and Spring context setup.
+    // Overkill for a simple library — we CAN use plain JUnit instead.
+    // testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Lightweight unit testing setup using pure JUnit Jupiter (no Spring needed)
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+
+    testImplementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+    testImplementation 'org.glassfish:jakarta.el:4.0.2'
+
+    // Optional, if you want to avoid EL entirely:
+    // testImplementation 'org.hibernate.validator:hibernate-validator-cdi'
+
+    //AssertJ – for .assertThat() and .anyMatch():
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    //Jakarta Bean Validation API – for getPropertyPath():
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
+}
+
+// Required to run tests using JUnit 5 (Jupiter) — enables the correct test engine
+tasks.named('test') {
+    useJUnitPlatform()
+}
