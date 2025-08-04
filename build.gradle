@@ -25,5 +25,6 @@ subprojects {
 
 
 tasks.register('test') {
-    dependsOn(subprojects.tasks.named('test'))
+    dependsOn(subprojects.collect { it.tasks.named('test') })
 }
+
