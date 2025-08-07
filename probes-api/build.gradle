@@ -4,8 +4,7 @@ plugins {
     // This module is just a library (DTOs and constants), so we don't need to create an executable jar.
     // id 'org.springframework.boot' version '3.5.4'
 
-
-//    id 'io.spring.dependency-management' version '1.1.7'
+    id 'maven-publish'
 }
 
 group = 'org.ober6'
@@ -62,5 +61,14 @@ dependencies {
 // Required to run tests using JUnit 5 (Jupiter) — enables the correct test engine
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// Configure publication for other modules to consume this
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
 
