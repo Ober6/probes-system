@@ -35,11 +35,10 @@ subprojects {
         implementation("org.springframework.cloud:spring-cloud-starter-config")
         implementation("org.springframework.cloud:spring-cloud-stream")
         implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
-
         compileOnly("org.projectlombok:lombok")
         annotationProcessor("org.projectlombok:lombok")
 
-        implementation("org.ober6.probes:probes-api:0.0.1-SNAPSHOT")
+        implementation(project(":probes-api"))
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework.cloud:spring-cloud-stream-test-binder")
