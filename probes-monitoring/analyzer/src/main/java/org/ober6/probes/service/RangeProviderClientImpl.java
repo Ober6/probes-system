@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import lombok.extern.slf4j.Slf4j;
 import org.ober6.probes.dto.Range;
 import org.ober6.probes.dto.SensorUpdateData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,13 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration
-@Service
 @Slf4j
+@Service
+@Configuration
 public class RangeProviderClientImpl implements RangeProviderClient {
 
-  @Autowired RestTemplate rest;
-  HashMap<Long, Range> cache = new HashMap<>();
+  public final RestTemplate rest; // now final and public for testing convenience
+  final HashMap<Long, Range> cache = new HashMap<>();
 
   @Value("${app.range.provider.host:localhost}")
   String host;
@@ -30,6 +29,10 @@ public class RangeProviderClientImpl implements RangeProviderClient {
 
   @Value("${app.range.provider.path:/sensor/range}")
   String path;
+
+  public RangeProviderClientImpl(RestTemplate rest) {
+    this.rest = rest;
+  }
 
   @Override
   public Range getRange(long sensorId) {
@@ -44,7 +47,7 @@ public class RangeProviderClientImpl implements RangeProviderClient {
   }
 
   private Range serviceRequest(long sensorId) {
-    Range range = null;
+    Range range;
     try {
       ResponseEntity<?> responseEntity =
           rest.exchange(getUrl(sensorId), HttpMethod.GET, null, Range.class);
@@ -63,12 +66,12 @@ public class RangeProviderClientImpl implements RangeProviderClient {
 
   private String getUrl(long sensorId) {
     String url = String.format("http://%s:%d%s%d", host, port, path, sensorId);
-    log.debug("url created id {}", url);
+    log.debug("url created: {}", url);
     return url;
   }
 
   @Bean
-  Consumer<SensorUpdateData> updateRangeConsumer() {
+  public Consumer<SensorUpdateData> updateRangeConsumer() {
     return updateData -> {
       long id = updateData.id();
       Range range = updateData.range();
