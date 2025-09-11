@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class RangeProviderClientImpl implements RangeProviderClient {
 
-  public final RestTemplate rest; // now final and public for testing convenience
+  public final RestTemplate rest;
   final HashMap<Long, Range> cache = new HashMap<>();
 
   @Value("${app.range.provider.host:localhost}")

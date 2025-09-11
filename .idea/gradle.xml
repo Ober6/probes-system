@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/probes-api" />
             <option value="$PROJECT_DIR$/probes-monitoring" />
+            <option value="$PROJECT_DIR$/probes-monitoring/accounts-provider" />
             <option value="$PROJECT_DIR$/probes-monitoring/analyzer" />
           </set>
         </option>
