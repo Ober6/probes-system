@@ -7,6 +7,7 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.36/5a30490a6e14977d97d9c73c924c1f1b5311ea95/lombok-1.18.36.jar" />
         </processorPath>
+        <module name="probes-system.probes-monitoring.accounts-provider.main" />
         <module name="probes-system.probes-monitoring.analyzer.main" />
       </profile>
     </annotationProcessing>
@@ -14,9 +15,12 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="probes-system.probes-monitoring.analyzer" options="-parameters -parameters" />
-      <module name="probes-system.probes-monitoring.analyzer.main" options="-parameters -parameters" />
-      <module name="probes-system.probes-monitoring.analyzer.test" options="-parameters -parameters" />
+      <module name="probes-system.probes-monitoring.accounts-provider" options="-parameters" />
+      <module name="probes-system.probes-monitoring.accounts-provider.main" options="-parameters" />
+      <module name="probes-system.probes-monitoring.accounts-provider.test" options="-parameters" />
+      <module name="probes-system.probes-monitoring.analyzer" options="-parameters" />
+      <module name="probes-system.probes-monitoring.analyzer.main" options="-parameters" />
+      <module name="probes-system.probes-monitoring.analyzer.test" options="-parameters" />
     </option>
   </component>
 </project>

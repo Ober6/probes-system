@@ -3,7 +3,6 @@ plugins {
     // Not needed for this module: Spring Boot is only for full applications with a main class.
     // This module is just a library (DTOs and constants), so we don't need to create an executable jar.
     // id 'org.springframework.boot' version '3.5.4'
-
     id 'maven-publish'
 }
 
